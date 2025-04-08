@@ -51,6 +51,20 @@ Run the complete test suite with coverage:
 ```bash
 mvn clean verify
 ```
+##  🏗️ Project Structure
+
+The project follows Hexagonal Architecture (Ports & Adapters) principles, organizing code into clearly defined layers:
+
+```
+src/
+├── main/
+│   ├── kotlin/com/example/productsapi/
+│   │   ├── application/       # Use cases and application services
+│   │   ├── domain/            # Core business logic
+│   │   ├── infrastructure/    # Technological adapters
+│   │   └── ProductsapiApplication.kt
+└── test/                      # Unit and integration tests
+```
 
 ## 🤝 Contributing
 We welcome contributions! Please follow these steps:

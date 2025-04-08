@@ -1,19 +1,20 @@
 package com.capitole.productsapi.infrastructure.web
 
-import org.hamcrest.Matchers.hasSize
-import org.hamcrest.Matchers.equalTo
+import com.capitole.productsapi.application.ProductServiceImpl
+import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
+import org.springframework.test.web.servlet.put
 
 @SpringBootTest
 @AutoConfigureMockMvc
 class ProductControllerIT {
-    @Autowired
-    lateinit var mvc: MockMvc;
+    @Autowired lateinit var mvc: MockMvc;
+    @Autowired lateinit var productService: ProductServiceImpl
 
     @Test
     fun `GET products - should return all products list with discounts`() {
@@ -51,4 +52,37 @@ class ProductControllerIT {
         }
     }
 
+    @Test
+    fun `GET products - should throw an exception when description is not valid`() {
+        mvc.get("/api/v1/products?sortBy=field&sortDirection=asc") {
+        }.andExpect { status { is4xxClientError() }
+            jsonPath("$.status", equalTo(400))
+            jsonPath("$.message", equalTo("Validation failed"))
+        }
+    }
+
+    @Test
+    fun `GET products - should return 400 when page is negative`() {
+        mvc.get("/api/v1/products?sortBy=description&sortDirection=asc&page=-1") {
+        }.andExpect { status { isBadRequest() }
+            jsonPath("$.message", equalTo("Validation failed"))
+            jsonPath("$.errors[0]", containsString("Page must be 0 or greater"))
+        }
+    }
+
+    @Test
+    fun `GET products - should return 400 when category exceeds max length`() {
+        val longCategory = "a".repeat(51)
+        mvc.get("/api/v1/products?category=$longCategory") {
+        }.andExpect { status { isBadRequest() }
+            jsonPath("$.message", equalTo("Validation failed"))
+            jsonPath("$.errors[0]", containsString("Category cannot exceed 50 characters"))
+        }
+    }
+
+    @Test
+    fun `GET products - should throw an exception when method is not allowed`() {
+        mvc.put("/api/v1/products") {
+        }.andExpect { status { is4xxClientError() } }
+    }
 }
