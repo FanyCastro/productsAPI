@@ -7,7 +7,7 @@ data class ProductDetails(
     val originalPrice: BigDecimal,
     val finalPrice: BigDecimal,
     val discountPercent: BigDecimal,
-    val discountType: String,
+    val discountType: String?,
     val description: String,
     val category: String,
 ) {}
