@@ -28,6 +28,10 @@ jobs:
           name: coverage-report
           path: target/site/jacoco-combined/
 
-      - name: Upload to Codecov (optional)
+      - name: Upload to Codecov
         uses: codecov/codecov-action@v4
         if: success()
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: FanyCastro/productsAPI
+          files: target/site/jacoco-combined/jacoco.xml
