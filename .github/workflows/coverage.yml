@@ -35,3 +35,4 @@ jobs:
           token: ${{ secrets.CODECOV_TOKEN }}
           slug: FanyCastro/productsAPI
           files: target/site/jacoco-combined/jacoco.xml
+          flags: kotlin-tests
