@@ -17,3 +17,16 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+springdoc:
+  swagger-ui:
+    path: /api-docs
+    tags-sorter: alpha
+    operations-sorter: alpha
+
+# This property enables the openapi and swagger-ui endpoints to be exposed beneath the actuator base path.
+management:
+  endpoints:
+    web:
+      exposure:
+        include: openapi, swagger-ui
