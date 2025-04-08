@@ -1,4 +1,4 @@
-package com.capitole.productsapi.infrastructure.dto
+package com.capitole.productsapi.infrastructure.web.dto
 
 import java.math.BigDecimal
 
