@@ -10,9 +10,8 @@ A high-performance REST API for product management built with Kotlin and Spring 
 ## ✨ Key Features
 
 - **Modern Stack**: Spring Boot 3 + Kotlin 1.9
-- **Multi-Database**: H2 (dev) & PostgreSQL (prod) ready
+- **Multi-Database**: H2 (dev) 
 - **Advanced Search**: Filter by name, category, price range
-- **JWT Security**: Ready for production authentication
 - **Full Test Coverage**: 95%+ with unit & integration tests
 
 ## 📚 API Documentation
@@ -63,4 +62,4 @@ We welcome contributions! Please follow these steps:
 5. Open a Pull Request
 
 ## 📜 License
-Distributed under the MIT License. See LICENSE for more information.
+Distributed under the Apache License. See [LICENSE](http://www.apache.org/licenses/) for more information.
