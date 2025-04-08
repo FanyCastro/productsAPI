@@ -21,7 +21,7 @@ class ProductServiceImpl (
         } else {
             repository.findAll(pageable)
         }
-       return products.map { toProductDetails(it) };
+       return products.map { toProductDetails(it) }
     }
 
     private fun toProductDetails(product: Product): ProductDetails {

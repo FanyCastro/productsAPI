@@ -1,7 +1,6 @@
 package com.capitole.productsapi.domain.service
 
 import com.capitole.productsapi.domain.model.Product
-import com.capitole.productsapi.domain.service.DiscountStrategy
 import java.math.BigDecimal
 
 class DiscountCalculator(

@@ -13,7 +13,7 @@ import org.springframework.test.web.servlet.put
 @SpringBootTest
 @AutoConfigureMockMvc
 class ProductControllerIT {
-    @Autowired lateinit var mvc: MockMvc;
+    @Autowired lateinit var mvc: MockMvc
     @Autowired lateinit var productService: ProductServiceImpl
 
     @Test

@@ -10,4 +10,4 @@ data class ProductDetails(
     val discountType: String?,
     val description: String,
     val category: String,
-) {}
+)

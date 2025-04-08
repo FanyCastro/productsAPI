@@ -1,6 +1,5 @@
 package com.capitole.productsapi.infrastructure.web.dto
 
-import com.capitole.productsapi.domain.model.Product
 import org.springframework.data.domain.Page
 
 data class ProductResponse(
