@@ -7,6 +7,7 @@ import org.springframework.validation.FieldError
 import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.RestControllerAdvice
+import java.util.stream.Collectors
 
 @RestControllerAdvice
 class GlobalExceptionHandler {
@@ -15,12 +16,11 @@ class GlobalExceptionHandler {
     fun handleValidationExceptions(
         ex: MethodArgumentNotValidException
     ): ResponseEntity<ErrorResponse> {
-        val errors = ex.bindingResult.allErrors.map { error ->
-            when (error) {
-                is FieldError -> "${error.field}: ${error.defaultMessage}"
-                else -> error.defaultMessage
+        val errors = ex.bindingResult.fieldErrors.stream()
+            .map { error ->
+                "${error.field}: ${error.defaultMessage ?: "validation error"}"
             }
-        }
+            .collect(Collectors.toList())
 
         return ResponseEntity.badRequest().body(
             ErrorResponse(
