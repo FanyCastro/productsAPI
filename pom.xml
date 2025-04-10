@@ -32,7 +32,7 @@
 		<maven.compiler.target>${java.version}</maven.compiler.target>
 		<cucumber.version>7.15.0</cucumber.version>
 		<junit-platform.version>1.10.0</junit-platform.version>
-		<kotlin.version>2.1.20</kotlin.version>
+		<kotlin.version>1.9.22</kotlin.version>
 		<sonar.host.url>https://sonarcloud.io</sonar.host.url>
 		<sonar.organization>estefania-castro</sonar.organization>
 		<sonar.projectKey>FanyCastro_productsAPI</sonar.projectKey>
@@ -43,7 +43,7 @@
 		<sonar.coverage.exclusions>**/model/**,**/config/**,**/*Application*,**/dto/**</sonar.coverage.exclusions>
 		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
 		<sonar.jacoco.reportPaths>target/site/jacoco/jacoco.xml</sonar.jacoco.reportPaths>
-		<sonar.kotlin.version>2.1.20</sonar.kotlin.version>
+		<sonar.kotlin.version>${kotlin.version}</sonar.kotlin.version>
 		<sonar.java.binaries>target/classes</sonar.java.binaries>
 		<sonar.kotlin.binaries>target/classes</sonar.kotlin.binaries>
 		<sonar.java.test.binaries>target/test-classes</sonar.java.test.binaries>

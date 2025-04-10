@@ -39,7 +39,7 @@ class ProductModelServiceImplTest {
         assertEquals(2, result.content.size)
 
         // Verify discounts applied
-        assertEquals(BigDecimal("15.00"), result.content[0].discountPercent)
+        assertEquals(BigDecimal(15), result.content[0].discountPercent)
         assertEquals(BigDecimal.ZERO, result.content[1].discountPercent)
 
         // Verify repository called
