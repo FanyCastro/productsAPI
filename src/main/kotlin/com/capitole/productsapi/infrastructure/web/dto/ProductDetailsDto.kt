@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Positive
 import java.math.BigDecimal
 
 @Schema(description = "Entity that represents a product with its details")
-data class ProductDetails(
+data class ProductDetailsDto(
     @Schema(
         description = "Stock Keeping Unit - unique identifier for the product",
         example = "SKU0007",

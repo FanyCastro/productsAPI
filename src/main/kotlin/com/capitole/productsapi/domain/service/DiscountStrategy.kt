@@ -1,16 +1,16 @@
 package com.capitole.productsapi.domain.service
 
-import com.capitole.productsapi.domain.model.Product
+import com.capitole.productsapi.domain.model.ProductModel
 import java.math.BigDecimal
 
 interface DiscountStrategy {
-    fun calculateDiscount(product: Product): BigDecimal
+    fun calculateDiscount(productModel: ProductModel): BigDecimal
     fun getDiscountType(): String?
 }
 
 class SpecialSkuDiscountStrategy : DiscountStrategy {
-    override fun calculateDiscount(product: Product): BigDecimal {
-        return if (product.hasSpecialDiscount()) BigDecimal("0.30")
+    override fun calculateDiscount(productModel: ProductModel): BigDecimal {
+        return if (productModel.hasSpecialDiscount()) BigDecimal("0.30")
         else BigDecimal.ZERO
     }
 
@@ -23,8 +23,8 @@ class CategoryDiscountStrategy : DiscountStrategy {
         "Home & Kitchen" to BigDecimal("0.25")
     )
 
-    override fun calculateDiscount(product: Product): BigDecimal {
-        return categoryDiscounts[product.category] ?: BigDecimal.ZERO
+    override fun calculateDiscount(productModel: ProductModel): BigDecimal {
+        return categoryDiscounts[productModel.category] ?: BigDecimal.ZERO
     }
 
     override fun getDiscountType() = "Category Discount"

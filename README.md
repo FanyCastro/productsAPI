@@ -60,6 +60,11 @@ mvn clean verify
 
 This project follows Hexagonal Architecture (also known as Ports & Adapters), a design pattern that emphasizes separation of concerns by isolating the core business logic from external concerns like databases, UIs, or third-party services.
 
+- **Unit Tests**: Verify individual components in isolation
+- **Integration Tests**: Validate interactions between components
+- **Architecture Tests**: Enforce hexagonal architecture rules
+- **BDD Tests**: Business scenarios using Cucumber
+
 ```
 src/
 ├── main/
@@ -73,7 +78,13 @@ src/
 │   │   │       ├── web/           # Controllers (REST adapters)
 │   │   │       └── persistence/   # Database implementations
 │   │   └── ProductsapiApplication.kt
-└── test/                      # Unit and integration tests
+└── test/
+│   ├── kotlin/
+│   │   ├── com/capitole/productsapi/
+│   │   │   ├── architecture/  # ArchUnit tests
+│   │   │   ├── bdd/           # Cucumber tests
+│   │   │   └── unit/          # Unit and integration test
+└──
 ```
 ### Key Components in This Repo
 
@@ -89,6 +100,17 @@ src/
    - HTTP Requests → Controllers (in `infrastructure.web`) → Use Cases (in `application`) → Domain Logic.
 2. Outbound (Driven Side):
    - Domain Logic → Port Interfaces → Adapters (e.g., database repositories in `infrastructure.persistence`).
+
+##  📊 Code Quality
+The project uses SonarCloud for code analysis. You can view the results at:
+https://sonarcloud.io/project/overview?id=FanyCastro_productsAPI
+
+Key metrics tracked:
+   - Code coverage
+   - Vulnerability detection
+   - Code smells
+
+Security hotspots
 
 ## 🤝 Contributing
 We welcome contributions! Please follow these steps:

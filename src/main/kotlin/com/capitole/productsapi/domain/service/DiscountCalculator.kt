@@ -1,15 +1,15 @@
 package com.capitole.productsapi.domain.service
 
-import com.capitole.productsapi.domain.model.Product
+import com.capitole.productsapi.domain.model.ProductModel
 import java.math.BigDecimal
 
 class DiscountCalculator(
     private val strategies: List<DiscountStrategy>
 ) {
-    fun calculateBestDiscount(product: Product): Pair<BigDecimal, String?> {
+    fun calculateBestDiscount(productModel: ProductModel): Pair<BigDecimal, String?> {
         return strategies
             .map { strategy ->
-                strategy.calculateDiscount(product) to strategy.getDiscountType()
+                strategy.calculateDiscount(productModel) to strategy.getDiscountType()
             }
             .filter { (discount, _) -> discount > BigDecimal.ZERO }
             .maxByOrNull { (discount, _) -> discount }

@@ -18,7 +18,7 @@ import java.math.BigDecimal
 @DataJpaTest
 @ActiveProfiles("test")
 @Import(JpaProductRepositoryAdapter::class)
-class JpaProductRepositoryAdapterTest {
+class JpaProductModelRepositoryAdapterTest {
 
     @Autowired lateinit var adapter: ProductRepository
     @Autowired lateinit var jpaRepository: ProductJpaRepository

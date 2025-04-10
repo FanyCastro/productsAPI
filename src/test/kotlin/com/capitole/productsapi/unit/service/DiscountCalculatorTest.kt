@@ -1,6 +1,6 @@
 package com.capitole.productsapi.unit.service
 
-import com.capitole.productsapi.domain.model.Product
+import com.capitole.productsapi.domain.model.ProductModel
 import com.capitole.productsapi.domain.service.CategoryDiscountStrategy
 import com.capitole.productsapi.domain.service.DiscountCalculator
 import com.capitole.productsapi.domain.service.SpecialSkuDiscountStrategy
@@ -18,8 +18,8 @@ class DiscountCalculatorTest {
 
     @Test
     fun `should apply special SKU discount first`() {
-        val product = Product("SKU0005", BigDecimal("100"), "Test", "Electronics")
-        val (discount, type) = calculator.calculateBestDiscount(product)
+        val productModel = ProductModel("SKU0005", BigDecimal("100"), "Test", "Electronics")
+        val (discount, type) = calculator.calculateBestDiscount(productModel)
 
         assertEquals(BigDecimal("0.30"), discount)
         assertEquals("Special SKU Discount", type)
@@ -27,8 +27,8 @@ class DiscountCalculatorTest {
 
     @Test
     fun `should apply category discount when no special SKU`() {
-        val product = Product("SKU0001", BigDecimal("100"), "Test", "Home & Kitchen")
-        val (discount, type) = calculator.calculateBestDiscount(product)
+        val productModel = ProductModel("SKU0001", BigDecimal("100"), "Test", "Home & Kitchen")
+        val (discount, type) = calculator.calculateBestDiscount(productModel)
 
         assertEquals(BigDecimal("0.25"), discount)
         assertEquals("Category Discount", type)
@@ -36,8 +36,8 @@ class DiscountCalculatorTest {
 
     @Test
     fun `should return zero when no discounts apply`() {
-        val product = Product("SKU0004", BigDecimal("100"), "Test", "Clothing")
-        val (discount, type) = calculator.calculateBestDiscount(product)
+        val productModel = ProductModel("SKU0004", BigDecimal("100"), "Test", "Clothing")
+        val (discount, type) = calculator.calculateBestDiscount(productModel)
 
         assertEquals(BigDecimal.ZERO, discount)
         assertNull(type)

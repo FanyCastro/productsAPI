@@ -2,7 +2,7 @@ package com.capitole.productsapi.unit.infrastructure.web
 
 import com.capitole.productsapi.application.ProductServiceImpl
 import com.capitole.productsapi.infrastructure.web.ProductController
-import com.capitole.productsapi.infrastructure.web.dto.ProductDetails
+import com.capitole.productsapi.infrastructure.web.dto.ProductDetailsDto
 import org.hamcrest.CoreMatchers.containsString
 import org.junit.jupiter.api.Test
 import org.mockito.kotlin.*
@@ -15,11 +15,12 @@ import org.springframework.http.MediaType
 import org.springframework.test.context.bean.override.mockito.MockitoBean
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get
-import org.springframework.test.web.servlet.result.MockMvcResultMatchers.*
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers.status
 import java.math.BigDecimal
 
 @WebMvcTest(ProductController::class)
-class ProductControllerTest {
+class ProductModelControllerTest {
     @Autowired private lateinit var mockMvc: MockMvc
     @MockitoBean
     private lateinit var productService: ProductServiceImpl
@@ -28,7 +29,7 @@ class ProductControllerTest {
     fun `should return products with default pagination`() {
         // Given
         val mockProducts = listOf(
-            ProductDetails(
+            ProductDetailsDto(
                 sku = "SKU1",
                 originalPrice = BigDecimal("100"),
                 finalPrice = BigDecimal("85"),
@@ -57,7 +58,7 @@ class ProductControllerTest {
     @Test
     fun `should filter by category when provided`() {
         // Given
-        val mockPage = PageImpl(emptyList<ProductDetails>())
+        val mockPage = PageImpl(emptyList<ProductDetailsDto>())
         whenever(productService.invoke(eq("Electronics"), any())).thenReturn(mockPage)
 
         // When/Then
@@ -74,7 +75,7 @@ class ProductControllerTest {
     @Test
     fun `should use custom pagination parameters`() {
         // Given
-        val mockPage = PageImpl(emptyList<ProductDetails>())
+        val mockPage = PageImpl(emptyList<ProductDetailsDto>())
         whenever(productService.invoke(isNull(), any())).thenReturn(mockPage)
 
         // When/Then

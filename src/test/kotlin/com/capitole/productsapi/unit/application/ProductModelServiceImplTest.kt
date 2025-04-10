@@ -1,7 +1,7 @@
 package com.capitole.productsapi.unit.application
 
 import com.capitole.productsapi.application.ProductServiceImpl
-import com.capitole.productsapi.domain.model.Product
+import com.capitole.productsapi.domain.model.ProductModel
 import com.capitole.productsapi.domain.port.out.ProductRepository
 import com.capitole.productsapi.domain.service.DiscountCalculator
 import io.mockk.every
@@ -13,7 +13,7 @@ import org.springframework.data.domain.PageImpl
 import org.springframework.data.domain.Pageable
 import java.math.BigDecimal
 
-class ProductServiceImplTest {
+class ProductModelServiceImplTest {
     private val mockRepository = mockk<ProductRepository>()
     private val mockCalculator = mockk<DiscountCalculator>()
 
@@ -22,14 +22,14 @@ class ProductServiceImplTest {
     @Test
     fun `getProducts should apply discounts to all products`() {
         // Given
-        val product1 = Product("SKU1", BigDecimal("100"), "Test1", "Electronics")
-        val product2 = Product("SKU2", BigDecimal("50"), "Test2", "Clothing")
-        val page = PageImpl(listOf(product1, product2))
+        val productModel1 = ProductModel("SKU1", BigDecimal("100"), "Test1", "Electronics")
+        val productModel2 = ProductModel("SKU2", BigDecimal("50"), "Test2", "Clothing")
+        val page = PageImpl(listOf(productModel1, productModel2))
 
         every { mockRepository.findAll(any<Pageable>()) } returns page
-        every { mockCalculator.calculateBestDiscount(product1) } returns
+        every { mockCalculator.calculateBestDiscount(productModel1) } returns
                 Pair(BigDecimal("0.15"), "Category Discount")
-        every { mockCalculator.calculateBestDiscount(product2) } returns
+        every { mockCalculator.calculateBestDiscount(productModel2) } returns
                 Pair(BigDecimal.ZERO, null)
 
         // When
@@ -49,11 +49,11 @@ class ProductServiceImplTest {
     @Test
     fun `getProducts should filter by category when provided`() {
         // Given
-        val product = Product("SKU1", BigDecimal("100"), "Test", "Electronics")
-        val page = PageImpl(listOf(product))
+        val productModel = ProductModel("SKU1", BigDecimal("100"), "Test", "Electronics")
+        val page = PageImpl(listOf(productModel))
 
         every { mockRepository.findByCategory("Electronics", any()) } returns page
-        every { mockCalculator.calculateBestDiscount(product) } returns
+        every { mockCalculator.calculateBestDiscount(productModel) } returns
                 Pair(BigDecimal("0.15"), null)
 
         // When

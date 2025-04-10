@@ -1,6 +1,6 @@
 package com.capitole.productsapi.infrastructure.persistence.entities
 
-import com.capitole.productsapi.domain.model.Product
+import com.capitole.productsapi.domain.model.ProductModel
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.Id
@@ -22,7 +22,7 @@ data class ProductEntity(
     @Column(nullable = false)
     val category: String
 ) {
-    fun toDomain() = Product(
+    fun toDomain() = ProductModel(
         sku = sku,
         price = price,
         description = description,

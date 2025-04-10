@@ -1,6 +1,7 @@
 package com.capitole.productsapi.unit.infrastructure.web
 
 import com.capitole.productsapi.application.ProductServiceImpl
+import com.capitole.productsapi.domain.port.`in`.ProductService
 import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
@@ -12,9 +13,9 @@ import org.springframework.test.web.servlet.put
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class ProductControllerIT {
+class ProductModelControllerIT {
     @Autowired lateinit var mvc: MockMvc
-    @Autowired lateinit var productService: ProductServiceImpl
+    @Autowired lateinit var productService: ProductService
 
     @Test
     fun `GET products - should return all products list with discounts`() {

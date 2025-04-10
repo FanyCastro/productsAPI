@@ -4,12 +4,12 @@ import io.swagger.v3.oas.annotations.media.Schema
 import org.springframework.data.domain.Page
 
 @Schema(description = "Paginated response containing product details and metadata")
-data class ProductResponse(
+data class ProductResponseDto<T>(
     @Schema(
         description = "List of product details in the current page",
         required = true
     )
-    val content: List<ProductDetails>,
+    val content: List<T>,
 
     @Schema(
         description = "Current page number (0-based index)",
@@ -48,8 +48,8 @@ data class ProductResponse(
 ) {
     companion object {
         @Schema(hidden = true)
-        fun from(page: Page<ProductDetails>): ProductResponse {
-            return ProductResponse(
+        fun <T> from(page: Page<T>): ProductResponseDto<T> {
+            return ProductResponseDto(
                 content = page.content,
                 page = page.number,
                 size = page.size,

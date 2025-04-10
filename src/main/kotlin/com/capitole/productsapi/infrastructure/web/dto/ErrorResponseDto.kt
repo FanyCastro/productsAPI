@@ -3,7 +3,7 @@ package com.capitole.productsapi.infrastructure.web.dto
 import io.swagger.v3.oas.annotations.media.Schema
 
 @Schema(description = "Standard error response returned by the API")
-data class ErrorResponse(
+data class ErrorResponseDto(
     @Schema(
         description = "HTTP status code of the error",
         example = "400",

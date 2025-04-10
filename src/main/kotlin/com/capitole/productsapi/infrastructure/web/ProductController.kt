@@ -1,8 +1,9 @@
 package com.capitole.productsapi.infrastructure.web
 
-import com.capitole.productsapi.application.ProductServiceImpl
-import com.capitole.productsapi.infrastructure.web.dto.ErrorResponse
-import com.capitole.productsapi.infrastructure.web.dto.ProductResponse
+import com.capitole.productsapi.domain.port.`in`.ProductService
+import com.capitole.productsapi.infrastructure.web.dto.ErrorResponseDto
+import com.capitole.productsapi.infrastructure.web.dto.ProductDetailsDto
+import com.capitole.productsapi.infrastructure.web.dto.ProductResponseDto
 import io.swagger.v3.oas.annotations.Operation
 import io.swagger.v3.oas.annotations.Parameter
 import io.swagger.v3.oas.annotations.media.Content
@@ -28,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController
 @Tag(name = "Product API", description = "Products management")
 @Validated
 class ProductController (
-    private val productService: ProductServiceImpl
+    private val productService: ProductService
 ) {
 
     @Operation(
@@ -43,19 +44,19 @@ class ProductController (
                 content = [
                     Content(
                         mediaType = "application/json",
-                        schema = Schema(implementation = ProductResponse::class)
+                        schema = Schema(implementation = ProductResponseDto::class)
                     )
                 ]
             ),
             ApiResponse(
                 responseCode = "400",
                 description = "Bad Request - Invalid parameters (sortBy, sortDirection, etc.)",
-                content = [Content(schema = Schema(implementation = ErrorResponse::class))]
+                content = [Content(schema = Schema(implementation = ErrorResponseDto::class))]
             ),
             ApiResponse(
                 responseCode = "500",
                 description = "Internal Server Error",
-                content = [Content(schema = Schema(implementation = ErrorResponse::class))]
+                content = [Content(schema = Schema(implementation = ErrorResponseDto::class))]
             )
         ]
     )
@@ -96,11 +97,11 @@ class ProductController (
         @Max(value = 100, message = "Size cannot exceed 100")
         size: Int
 
-    ): ResponseEntity<ProductResponse> {
+    ): ResponseEntity<ProductResponseDto<ProductDetailsDto>> {
         val direction = Sort.Direction.fromString(sortDirection)
         val pageable = PageRequest.of(page, size, Sort.by(direction, sortBy))
 
         val products = productService.invoke(category, pageable)
-        return ResponseEntity.ok(ProductResponse.from(products))
+        return ResponseEntity.ok(ProductResponseDto.from(products))
     }
 }
