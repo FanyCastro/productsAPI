@@ -1,17 +1,19 @@
 package com.capitole.productsapi.bdd.steps
 
-import com.capitole.productsapi.infrastructure.web.dto.ProductResponse
 import com.jayway.jsonpath.JsonPath
 import io.cucumber.java.en.Given
 import io.cucumber.java.en.Then
 import io.cucumber.java.en.When
+import io.cucumber.spring.CucumberContextConfiguration
 import org.junit.jupiter.api.Assertions.*
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager
+import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.web.client.TestRestTemplate
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 
+@CucumberContextConfiguration
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class ProductsSteps : BaseStepDefinitions() {
     @Given("the product catalog contains products")
     fun `the product catalog contains products`() {

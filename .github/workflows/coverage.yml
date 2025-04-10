@@ -43,3 +43,12 @@ jobs:
           slug: FanyCastro/productsAPI
           files: target/site/jacoco-combined/jacoco.xml
           flags: kotlin-tests
+
+      - name: Run cucumber tests
+        run: mvn clean test -Dtest=CucumberTestSuite -Dcucumber.reports.dir=target/cucumber-reports
+
+      - name: Upload cucumber report
+        uses: actions/upload-artifact@v4
+        with:
+          name: cucumber-report
+          path: target/cucumber-reports/
