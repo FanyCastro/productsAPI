@@ -3,7 +3,7 @@
 ![Java CI](https://img.shields.io/github/actions/workflow/status/FanyCastro/productsAPI/maven.yml?logo=github&label=Build)
 ![Coverage](https://img.shields.io/codecov/c/github/FanyCastro/productsAPI/main?logo=codecov&label=Coverage)
 ![License](https://img.shields.io/github/license/FanyCastro/productsAPI?color=blue)
-![Kotlin](https://img.shields.io/badge/Kotlin-1.9.0-blueviolet?logo=kotlin)
+![Kotlin](https://img.shields.io/badge/Kotlin-2.1.20-blueviolet?logo=kotlin)
 
 A high-performance REST API for product management built with Kotlin and Spring Boot. Perfect for e-commerce backends or Kotlin learning projects.
 

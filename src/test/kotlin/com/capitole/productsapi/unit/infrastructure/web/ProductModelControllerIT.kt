@@ -1,6 +1,5 @@
 package com.capitole.productsapi.unit.infrastructure.web
 
-import com.capitole.productsapi.application.ProductServiceImpl
 import com.capitole.productsapi.domain.port.`in`.ProductService
 import org.hamcrest.Matchers.*
 import org.junit.jupiter.api.Test
