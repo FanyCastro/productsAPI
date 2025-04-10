@@ -1,4 +1,4 @@
-package com.capitole.productsapi.infrastructure.web
+package com.capitole.productsapi.unit.infrastructure.web
 
 import com.capitole.productsapi.application.ProductServiceImpl
 import org.hamcrest.Matchers.*

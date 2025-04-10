@@ -33,7 +33,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
-          path: target/site/jacoco-combined/
+          path: target/site/jacoco/
 
       - name: Upload to Codecov
         uses: codecov/codecov-action@v4

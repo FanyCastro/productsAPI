@@ -1,5 +1,6 @@
-package com.capitole.productsapi.application
+package com.capitole.productsapi.unit.application
 
+import com.capitole.productsapi.application.ProductServiceImpl
 import com.capitole.productsapi.domain.model.Product
 import com.capitole.productsapi.domain.port.out.ProductRepository
 import com.capitole.productsapi.domain.service.DiscountCalculator

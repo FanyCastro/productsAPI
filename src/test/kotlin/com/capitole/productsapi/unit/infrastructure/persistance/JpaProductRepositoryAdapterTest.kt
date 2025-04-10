@@ -1,4 +1,4 @@
-package com.capitole.productsapi.infrastructure.persistance
+package com.capitole.productsapi.unit.infrastructure.persistance
 
 import com.capitole.productsapi.domain.port.out.ProductRepository
 import com.capitole.productsapi.infrastructure.persistence.adapters.JpaProductRepositoryAdapter
@@ -12,13 +12,11 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager
 import org.springframework.context.annotation.Import
 import org.springframework.data.domain.PageRequest
+import org.springframework.test.context.ActiveProfiles
 import java.math.BigDecimal
 
-@DataJpaTest(properties = [
-    "spring.datasource.url=jdbc:h2:mem:testdb;DB_CLOSE_DELAY=-1",
-    "spring.datasource.driver-class-name=org.h2.Driver",
-    "spring.jpa.hibernate.ddl-auto=create-drop"
-])
+@DataJpaTest
+@ActiveProfiles("test")
 @Import(JpaProductRepositoryAdapter::class)
 class JpaProductRepositoryAdapterTest {
 

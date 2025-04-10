@@ -1,6 +1,7 @@
-package com.capitole.productsapi.infrastructure.web
+package com.capitole.productsapi.unit.infrastructure.web
 
 import com.capitole.productsapi.application.ProductServiceImpl
+import com.capitole.productsapi.infrastructure.web.ProductController
 import com.capitole.productsapi.infrastructure.web.dto.ProductDetails
 import org.hamcrest.CoreMatchers.containsString
 import org.junit.jupiter.api.Test

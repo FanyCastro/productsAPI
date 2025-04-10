@@ -1,6 +1,9 @@
-package com.capitole.productsapi.domain.service
+package com.capitole.productsapi.unit.service
 
 import com.capitole.productsapi.domain.model.Product
+import com.capitole.productsapi.domain.service.CategoryDiscountStrategy
+import com.capitole.productsapi.domain.service.DiscountCalculator
+import com.capitole.productsapi.domain.service.SpecialSkuDiscountStrategy
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
