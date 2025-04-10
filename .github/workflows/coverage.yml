@@ -44,6 +44,11 @@ jobs:
           files: target/site/jacoco-combined/jacoco.xml
           flags: kotlin-tests
 
+      - name: Run SonarQube Analysis
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: mvn sonar:sonar
+
       - name: Run cucumber tests
         run: mvn clean test -Dtest=CucumberTestSuite -Dcucumber.reports.dir=target/cucumber-reports
 
