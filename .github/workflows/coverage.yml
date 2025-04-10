@@ -50,7 +50,7 @@ jobs:
         run: mvn sonar:sonar
 
       - name: Run cucumber tests
-        run: mvn clean test -Dtest=CucumberTestSuite -Dcucumber.reports.dir=target/cucumber-reports
+        run: mvn test -Dtest=CucumberTestSuite -Dcucumber.reports.dir=target/cucumber-reports
 
       - name: Upload cucumber report
         uses: actions/upload-artifact@v4
