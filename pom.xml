@@ -43,7 +43,7 @@
 		<sonar.coverage.exclusions>**/model/**,**/config/**,**/*Application*,**/dto/**</sonar.coverage.exclusions>
 		<sonar.java.coveragePlugin>jacoco</sonar.java.coveragePlugin>
 		<sonar.jacoco.reportPaths>target/site/jacoco/jacoco.xml</sonar.jacoco.reportPaths>
-		<sonar.kotlin.version>1.9.0</sonar.kotlin.version>
+		<sonar.kotlin.version>2.1.20</sonar.kotlin.version>
 		<sonar.java.binaries>target/classes</sonar.java.binaries>
 		<sonar.kotlin.binaries>target/classes</sonar.kotlin.binaries>
 		<sonar.java.test.binaries>target/test-classes</sonar.java.test.binaries>
@@ -128,11 +128,6 @@
             <scope>test</scope>
         </dependency>
 		<dependency>
-			<groupId>org.jetbrains.kotlin</groupId>
-			<artifactId>kotlin-stdlib-jdk8</artifactId>
-			<version>${kotlin.version}</version>
-		</dependency>
-		<dependency>
 			<groupId>io.mockk</groupId>
 			<artifactId>mockk</artifactId>
 			<version>1.13.17</version>
@@ -181,10 +176,6 @@
 			<artifactId>junit-platform-suite</artifactId>
 			<version>${junit-platform.version}</version>
 			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.jetbrains.kotlin</groupId>
-			<artifactId>kotlin-reflect</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.tngtech.archunit</groupId>

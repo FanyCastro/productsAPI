@@ -4,6 +4,7 @@ import com.capitole.productsapi.infrastructure.web.dto.ErrorResponse
 import jakarta.validation.ConstraintViolationException
 import org.slf4j.LoggerFactory
 import org.springframework.http.HttpStatus
+import org.springframework.web.HttpRequestMethodNotSupportedException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
@@ -27,6 +28,24 @@ class GlobalExceptionHandler () {
                 message = "Validation failed",
                 errors = errors
             )
+    }
+
+    @ExceptionHandler(HttpRequestMethodNotSupportedException::class)
+    @ResponseStatus(HttpStatus.METHOD_NOT_ALLOWED)
+    fun handleHttpRequestMethodNotSupported(
+        ex: HttpRequestMethodNotSupportedException
+    ): ErrorResponse {
+        val supportedMethods = ex.supportedMethods?.toList() ?: emptyList()
+
+        return ErrorResponse(
+            status = HttpStatus.METHOD_NOT_ALLOWED.value(),
+            message = "HTTP method '${ex.method}' is not supported for this endpoint. Supported methods: ${supportedMethods.joinToString(", ")}",
+            errors = listOf(
+                "Attempted method: ${ex.method}",
+                "Supported methods: ${supportedMethods.joinToString(", ")}",
+                "Reference: https://api.yourdomain.com/docs/errors#405"
+            )
+        )
     }
 
     @ExceptionHandler(Exception::class)
