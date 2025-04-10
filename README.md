@@ -10,9 +10,19 @@ A high-performance REST API for product management built with Kotlin and Spring 
 ## ✨ Key Features
 
 - **Modern Stack**: Spring Boot 3 + Kotlin 1.9
-- **Multi-Database**: H2 (dev)  (nice to have -> postgresql in pro)
+- **Multi-Database**: H2 (dev) 
 - **Advanced Search**: Filter by name, category, price range
 - **Full Test Coverage**: 95%+ with unit & integration tests
+
+## ✨ Key Improvements
+
+- Replace H2 in-memory database with PostgreSQL for production environments
+- Add connection pooling configuration for better performance
+- Add authentication and authorization (JWT/OAuth2)
+- Add chaos testing to verify system resilience
+- Add structured logging with correlation IDs
+- Set up metrics collection for business KPIs 
+- Implement health checks and readiness probes
 
 ## 📚 API Documentation
 
