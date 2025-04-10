@@ -16,15 +16,20 @@ A high-performance REST API for product management built with Kotlin and Spring 
 
 ## 📚 API Documentation
 
+This project provides automatic API documentation through Swagger UI and OpenAPI 3.0 specifications.
+
+### Accessing Documentation
+1. Swagger UI (Interactive)
+   - Local Development: visit this URL in your browser while the application is running http://localhost:8080/swagger-ui/index.html
+2. OpenAPI JSON
+   - Access the raw OpenAPI specification at: http://localhost:8080/v3/api-docs (Use this for API clients or code generation tools)
+   - For a specific API group (if applicable): http://localhost:8080/v3/api-docs/{group-name}
+
 ### Core Endpoints
 
 | Method | Endpoint                | Description                  |
 |--------|-------------------------|------------------------------|
 | GET    | `/api/products`         | List all products            |
-| POST   | `/api/products`         | Create new product           |
-| GET    | `/api/products/{id}`    | Get product details          |
-| PUT    | `/api/products/{id}`    | Update product               |
-| DELETE | `/api/products/{id}`    | Delete product               |
 
 ### Additional Features
 - Pagination: `?page=1&size=20`
