@@ -39,7 +39,7 @@ class ProductControllerTest {
             )
         )
         val mockPage = PageImpl(mockProducts)
-        whenever(productService.getProducts(isNull(), any())).thenReturn(mockPage)
+        whenever(productService.invoke(isNull(), any())).thenReturn(mockPage)
 
         // When/Then
         mockMvc.perform(get("/api/v1/products")
@@ -49,7 +49,7 @@ class ProductControllerTest {
             .andExpect(jsonPath("$.content[0].finalPrice").value(85))
             .andExpect(jsonPath("$.content[0].discountPercent").value(15))
 
-        verify(productService).getProducts(
+        verify(productService).invoke(
             null,
             PageRequest.of(0, 10, Sort.by(Sort.Direction.ASC, "sku")))
     }
@@ -58,7 +58,7 @@ class ProductControllerTest {
     fun `should filter by category when provided`() {
         // Given
         val mockPage = PageImpl(emptyList<ProductDetails>())
-        whenever(productService.getProducts(eq("Electronics"), any())).thenReturn(mockPage)
+        whenever(productService.invoke(eq("Electronics"), any())).thenReturn(mockPage)
 
         // When/Then
         mockMvc.perform(get("/api/v1/products")
@@ -66,7 +66,7 @@ class ProductControllerTest {
             .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk)
 
-        verify(productService).getProducts(
+        verify(productService).invoke(
             "Electronics",
             PageRequest.of(0, 10, Sort.by(Sort.Direction.ASC, "sku")))
     }
@@ -75,7 +75,7 @@ class ProductControllerTest {
     fun `should use custom pagination parameters`() {
         // Given
         val mockPage = PageImpl(emptyList<ProductDetails>())
-        whenever(productService.getProducts(isNull(), any())).thenReturn(mockPage)
+        whenever(productService.invoke(isNull(), any())).thenReturn(mockPage)
 
         // When/Then
         mockMvc.perform(get("/api/v1/products")
@@ -86,7 +86,7 @@ class ProductControllerTest {
             .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk)
 
-        verify(productService).getProducts(
+        verify(productService).invoke(
             null,
             PageRequest.of(2, 20, Sort.by(Sort.Direction.DESC, "price")))
     }
@@ -103,7 +103,7 @@ class ProductControllerTest {
     @Test
     fun `should return internal error server when products throws an exception`() {
         // Given
-        whenever(productService.getProducts(isNull(), any())).thenThrow(RuntimeException::class.java)
+        whenever(productService.invoke(isNull(), any())).thenThrow(RuntimeException::class.java)
 
         // When/Then
         mockMvc.perform(get("/api/v1/products")
@@ -111,7 +111,7 @@ class ProductControllerTest {
             .andExpect(status().isInternalServerError)
             .andExpect(jsonPath("$.errors[0]").value(containsString("SERVER_ERROR")))
 
-        verify(productService).getProducts(
+        verify(productService).invoke(
             null,
             PageRequest.of(0, 10, Sort.by(Sort.Direction.ASC, "sku")))
     }

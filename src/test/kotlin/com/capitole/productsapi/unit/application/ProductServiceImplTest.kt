@@ -33,7 +33,7 @@ class ProductServiceImplTest {
                 Pair(BigDecimal.ZERO, null)
 
         // When
-        val result = service.getProducts(null, Pageable.unpaged())
+        val result = service.invoke(null, Pageable.unpaged())
 
         // Then
         assertEquals(2, result.content.size)
@@ -57,7 +57,7 @@ class ProductServiceImplTest {
                 Pair(BigDecimal("0.15"), null)
 
         // When
-        val result = service.getProducts("Electronics", Pageable.unpaged())
+        val result = service.invoke("Electronics", Pageable.unpaged())
 
         // Then
         assertEquals(1, result.content.size)

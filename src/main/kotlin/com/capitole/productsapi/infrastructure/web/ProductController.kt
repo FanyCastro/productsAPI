@@ -100,7 +100,7 @@ class ProductController (
         val direction = Sort.Direction.fromString(sortDirection)
         val pageable = PageRequest.of(page, size, Sort.by(direction, sortBy))
 
-        val products = productService.getProducts(category, pageable)
+        val products = productService.invoke(category, pageable)
         return ResponseEntity.ok(ProductResponse.from(products))
     }
 }
