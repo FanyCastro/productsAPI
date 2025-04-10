@@ -58,18 +58,37 @@ mvn clean verify
 ```
 ##  🏗️ Project Structure
 
-The project follows Hexagonal Architecture (Ports & Adapters) principles, organizing code into clearly defined layers:
+This project follows Hexagonal Architecture (also known as Ports & Adapters), a design pattern that emphasizes separation of concerns by isolating the core business logic from external concerns like databases, UIs, or third-party services.
 
 ```
 src/
 ├── main/
-│   ├── kotlin/com/example/productsapi/
-│   │   ├── application/       # Use cases and application services
-│   │   ├── domain/            # Core business logic
-│   │   ├── infrastructure/    # Technological adapters
+│   ├── kotlin/
+│   │   ├── com/capitole/productsapi/
+│   │   │   ├── domain/            # Pure business logic
+│   │   │   │   ├── model/         # Domain entities (e.g., Product)
+│   │   │   │   └── ports/         # Interfaces (e.g., ProductRepositoryPort)
+│   │   │   ├── application/       # Use cases and application services
+│   │   │   └── infrastructure/    # Technological adapters
+│   │   │       ├── web/           # Controllers (REST adapters)
+│   │   │       └── persistence/   # Database implementations
 │   │   └── ProductsapiApplication.kt
 └── test/                      # Unit and integration tests
 ```
+### Key Components in This Repo
+
+| Layer       | Location                                  | Responsibility                                                                               |
+|-------------|-------------------------------------------|----------------------------------------------------------------------------------------------|
+| Domain      | `com.capitole.productsapi.domain`         | Contains pure business logic, entities, and domain rules.                                    |
+| Application | `com.capitole.productsapi.application`    | Orchestrates use cases, implements business workflows.                                       |
+| Ports       | `com.capitole.productsapi.domain.ports`   | Interfaces defining how the domain interacts with external systems (input/output contracts). |
+| Adapters    | `com.capitole.productsapi.infrastructure` | Concrete implementations of ports (e.g., databases, web controllers, external APIs).         |
+
+## 🔄 Flow of Control
+1. Inbound (Driving Side):
+   - HTTP Requests → Controllers (in `infrastructure.web`) → Use Cases (in `application`) → Domain Logic.
+2. Outbound (Driven Side):
+   - Domain Logic → Port Interfaces → Adapters (e.g., database repositories in `infrastructure.persistence`).
 
 ## 🤝 Contributing
 We welcome contributions! Please follow these steps:
