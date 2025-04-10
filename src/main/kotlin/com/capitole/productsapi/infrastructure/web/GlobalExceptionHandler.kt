@@ -14,25 +14,6 @@ import java.util.stream.Collectors
 class GlobalExceptionHandler () {
     private val logger = LoggerFactory.getLogger(this.javaClass)
 
-    @ExceptionHandler(MethodArgumentNotValidException::class)
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    fun handleValidationExceptions(
-        ex: MethodArgumentNotValidException
-    ): ErrorResponse {
-        logger.error("Invalid parameters MethodArgumentNotValidException - ${ex.bindingResult.allErrors}")
-        val errors = ex.bindingResult.fieldErrors.stream()
-            .map { error ->
-                "${error.field}: ${error.defaultMessage ?: "validation error"}"
-            }
-            .collect(Collectors.toList())
-
-        return ErrorResponse(
-                status = HttpStatus.BAD_REQUEST.value(),
-                message = "Validation failed",
-                errors = errors
-            )
-    }
-
     @ExceptionHandler(ConstraintViolationException::class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     fun handleConstraintViolationExceptions(
@@ -57,7 +38,7 @@ class GlobalExceptionHandler () {
         return ErrorResponse(
             status = HttpStatus.INTERNAL_SERVER_ERROR.value(),
             message = "Internal server error",
-            errors = listOf("SERVER_ERROR")
+            errors = listOf("SERVER_ERROR ${ex.message}")
         )
     }
 }

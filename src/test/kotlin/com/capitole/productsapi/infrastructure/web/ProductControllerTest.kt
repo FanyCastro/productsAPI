@@ -100,6 +100,22 @@ class ProductControllerTest {
     }
 
     @Test
+    fun `should return internal error server when products throws an exception`() {
+        // Given
+        whenever(productService.getProducts(isNull(), any())).thenThrow(RuntimeException::class.java)
+
+        // When/Then
+        mockMvc.perform(get("/api/v1/products")
+            .accept(MediaType.APPLICATION_JSON))
+            .andExpect(status().isInternalServerError)
+            .andExpect(jsonPath("$.errors[0]").value(containsString("SERVER_ERROR")))
+
+        verify(productService).getProducts(
+            null,
+            PageRequest.of(0, 10, Sort.by(Sort.Direction.ASC, "sku")))
+    }
+
+    @Test
     fun `should return 400 when invalid sortDirection`() {
         mockMvc.perform(get("/api/v1/products")
             .param("sortDirection", "invalid")
