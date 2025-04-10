@@ -12,10 +12,7 @@ import org.springframework.boot.runApplication
 @SpringBootApplication
 class ProductsapiApplication
 
-/**
- * Main entry point of the application.
- * Starts the Spring Boot application with the provided arguments.
- *
- * @param args Command line arguments
- */
-fun main(args: Array<String>) = runApplication<ProductsapiApplication>(*args)
+
+fun main(args: Array<String>) {
+    runApplication<ProductsapiApplication>(*args)
+}
