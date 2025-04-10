@@ -1,6 +1,7 @@
 package com.capitole.productsapi.unit.application
 
 import com.capitole.productsapi.application.ProductServiceImpl
+import com.capitole.productsapi.domain.model.DiscountResultModel
 import com.capitole.productsapi.domain.model.ProductModel
 import com.capitole.productsapi.domain.port.out.ProductRepository
 import com.capitole.productsapi.domain.service.DiscountCalculator
@@ -28,9 +29,9 @@ class ProductModelServiceImplTest {
 
         every { mockRepository.findAll(any<Pageable>()) } returns page
         every { mockCalculator.calculateBestDiscount(productModel1) } returns
-                Pair(BigDecimal("0.15"), "Category Discount")
+                DiscountResultModel(BigDecimal("0.15"), "Category Discount")
         every { mockCalculator.calculateBestDiscount(productModel2) } returns
-                Pair(BigDecimal.ZERO, null)
+                DiscountResultModel(BigDecimal.ZERO, null)
 
         // When
         val result = service.invoke(null, Pageable.unpaged())
@@ -54,7 +55,7 @@ class ProductModelServiceImplTest {
 
         every { mockRepository.findByCategory("Electronics", any()) } returns page
         every { mockCalculator.calculateBestDiscount(productModel) } returns
-                Pair(BigDecimal("0.15"), null)
+                DiscountResultModel(BigDecimal("0.15"), null)
 
         // When
         val result = service.invoke("Electronics", Pageable.unpaged())

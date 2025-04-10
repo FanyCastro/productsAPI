@@ -11,13 +11,6 @@ import org.springframework.stereotype.Service
 import java.math.BigDecimal
 import java.math.RoundingMode
 
-/**
- * Implementation of the product service that manages business logic
- * related to products and their discounts.
- *
- * @property repository Product repository for data access
- * @property discountCalculator Discount calculator for products
- */
 @Service
 class ProductServiceImpl(
     private val repository: ProductRepository,
@@ -28,11 +21,6 @@ class ProductServiceImpl(
         repository.findProductsByCategory(category, pageable)
             .map { it.toProductDetails() }
 
-    /**
-     * Converts a product model to DTO with product details and its discount.
-     *
-     * @return ProductDetailsDto containing product information and calculated discount
-     */
     private fun ProductModel.toProductDetails(): ProductDetailsDto {
         val (discount, discountType) = discountCalculator.calculateBestDiscount(this)
         val finalPrice = calculateFinalPrice(price, discount)
@@ -48,23 +36,14 @@ class ProductServiceImpl(
         )
     }
 
-    /**
-     * Calculates the final price after applying the discount.
-     *
-     * @param originalPrice Original product price
-     * @param discount Discount to apply (in decimal)
-     * @return Final price after discount
-     */
     private fun calculateFinalPrice(originalPrice: BigDecimal, discount: BigDecimal): BigDecimal =
         originalPrice.multiply(BigDecimal.ONE.subtract(discount))
             .setScale(2, RoundingMode.HALF_UP)
 }
 
-/**
- * Repository extension to handle product search by category.
- */
+
 private fun ProductRepository.findProductsByCategory(category: String?, pageable: Pageable): Page<ProductModel> =
     when (category) {
         null -> findAll(pageable)
         else -> findByCategory(category, pageable)
-    }
+}
